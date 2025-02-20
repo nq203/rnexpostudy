@@ -25,10 +25,10 @@ const FormFiled: React.FC<FormFiledProps> = ({
   const [showPassword, setShowPassword] = useState<Boolean>(false);
   return (
     <View className="space-y-2 m-2">
-      <Text className="text-base text-gray-100 font-medium py-2">{title}</Text>
-      <View className="border-2 w-full flex-row h-16 rounded-lg px-4 border-gray-800 items-center justify-center bg-gray-800">
+      <Text className="text-base  font-medium py-2">{title}</Text>
+      <View className="border-2 w-full flex-row h-16 rounded-lg px-4 border-[#FAF7F0] items-center justify-center bg-[#FAF7F0]">
         <TextInput
-          className="flex-1 w-full text-white"
+          className="flex-1 w-full text-[#543310]"
           value={value}
           onChangeText={handleChangeText}
           placeholder={placeholder}
@@ -39,7 +39,7 @@ const FormFiled: React.FC<FormFiledProps> = ({
           {title == "Password" && (
             <Ionicons
               name={showPassword ? "eye" : "eye-off-outline"}
-              color="white"
+              color="#543310"
               size={32}
             ></Ionicons>
           )}

@@ -5,7 +5,7 @@ import {
 } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 import TabNavigator from "./TabNavigator";
-import { RootStackParamList } from "./types";
+import { RootStackParamList } from "../Types/types";
 import LoginScreen from "../screens/Auth/LoginScreen";
 import RegisterScreen from "../screens/Auth/RegisterScreen";
 const Stack = createStackNavigator<RootStackParamList>();
@@ -30,8 +30,8 @@ export default function StackNavigator() {
         component={TabNavigator}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="Register" component={RegisterScreen} options={{headerShown: false}} />
     </Stack.Navigator>
   );
 }

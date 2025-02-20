@@ -1,4 +1,4 @@
-import { View, Text, Button, Image, TouchableOpacity } from "react-native";
+import { View, Text, Button, Image, TouchableOpacity, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import { LoginScreenNavigationProp } from "@/app/router/StackNavigator";
 import FormFiled from "./Components/FormFiled";
@@ -6,44 +6,40 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomButton from "./Components/CustomButton";
 import { account } from "@/AppWrite/AppwriteConfig";
+import { sampleUser } from "@/app/sampleData";
 type Props = {
   navigation: LoginScreenNavigationProp;
 };
 const LoginScreen = ({ navigation }: Props) => {
-  useEffect(()=>{
-  account.deleteSessions();
-  
-  console.log("delete session");
-  })
-  const handleLogin =async () => {
-    
-    if(form.email &&form.password){
-      try {
-        const data = await account.createEmailPasswordSession(form.email,form.password);
-        console.log(data);
-        if(data.userId)navigation.navigate('Tabs');
-      } catch (error) {
-        console.error(error);
-      }
-      
-    }
-    
-  };
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
+  const handleLogin =async () => {
+    
+    //logic 
+    if(!(form.email && form.password)) {
+      Alert.alert("Dien day du vao!");
+      return;
+    } 
+    if (form.email == sampleUser.email && form.password == sampleUser.password){
+      navigation.navigate('Tabs');
+    }else{
+      Alert.alert("Sai roi?");
+    }
+    
+  };
   return (
-    <SafeAreaView className="bg-slate-700 h-full justify-center item-center">
+    <SafeAreaView className="bg-[#D8D2C2] h-full justify-center item-center">
       <ScrollView className="w-full">
         <View className="w-full justify-center h-full px-4 my-6">
           <Image
-            source={require("../../../assets/images/logo.png")}
+            source={require("../../../assets/images/logo.jpeg")}
             resizeMode="contain"
-            className="w-[115px] h-[35px]"
+            className="w-[100px] h-[100px] rounded-full"
           />
-          <Text className="text-2xl text-white font-semibold">
-            Login to App
+          <Text className="text-2xl text-[#543310]  font-semibold">
+            Cafe gì chưa người đẹp ?
           </Text>
           <FormFiled
             title="Email"
@@ -58,11 +54,11 @@ const LoginScreen = ({ navigation }: Props) => {
             handleChangeText={(e) => setForm({ ...form, password: e })}
           />
           <CustomButton title="Login" handleSubmit={handleLogin}></CustomButton>
-          <View className="flex-row justify-center w-full px-4 my-2">
-            <Text className="px-2 font-semibold text-white" >nếu bạn chưa có tài khoản?</Text>
+          <View className="flex-row justify-center w-full px-4 my-2 mt-5">
+            <Text className="px-2 font-semibold text-[#854836]" >nếu bạn chưa có tài khoản?</Text>
             <TouchableOpacity onPress={()=>{
               navigation.navigate('Register',{itemId:1,otherParam: "dangkingay"})}}>
-              <Text className="font-semibold text-orange-400">Đăng kí ngay</Text>
+              <Text className="font-semibold text-[#543310]">Đăng kí ngay</Text>
             </TouchableOpacity>
           </View>
         </View>
